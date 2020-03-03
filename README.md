@@ -1,6 +1,6 @@
 # Learn Open GL
 
-https://learnopengl.com 를 구현해보는 프로젝트 입니다.
+https://learnopengl.com 를 구현 프로젝트 입니다.
 
 하나의 솔루션 아래 여러가지 프로젝트로 구성되어 있습니다.
 
@@ -202,12 +202,13 @@ unsigned int greenTriangle = CompileShader(vertexShaderSource, fragmentShaderSou
 
 	...
     
-    //render loop
+        //render loop
     
-    ...
+        ...
     
-    glUseProgram(shaderProgram);
+	glUseProgram(shaderProgram);
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
 ```
 
