@@ -9,24 +9,33 @@ const unsigned int SCR_HEIGHT = 600;
 
 //정점 쉐이더 코드 작성
 const char* vertexShaderSource = "#version 330 core\n"
-	"layout (location = 0) in vec3 aPos;\n"
-	"void main()\n"
-	"{\n"
-	"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-	"}\0";
+"layout (location = 0) in vec3 aPos;\n"
+"void main()\n"
+"{\n"
+"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+"}\0";
 
 const char* fragmentShaderSource = "#version 330 core\n"
-	"out vec4 FragColor;\n"
-	"void main()\n"
-	"{\n"
-	"   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-	"}\n\0";
+"out vec4 FragColor;\n"
+"void main()\n"
+"{\n"
+"   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+"}\n\0";
+
+const char* fragmentShaderSource2 = "#version 330 core\n"
+"out vec4 FragColor;\n"
+"void main()\n"
+"{\n"
+"   FragColor = vec4(0.2f, 0.5f, 0.4f, 1.0f);\n"
+"}\n\0";
 
 
 //뷰포트 변경시 작동하는 콜백함수
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 // 입력값을 받아서 처리
 void processInput(GLFWwindow* window);
+//쉐이더 컴파일 코드
+unsigned int CompileShader(const char* vertextShaderSource, const char* fragmentShaderSource);
 
 int main() {
 	//glfw 초기화
@@ -54,6 +63,92 @@ int main() {
 		return -1;
 	}
 
+	unsigned int orangeTriangle = CompileShader(vertexShaderSource, fragmentShaderSource);
+	unsigned int greenTriangle = CompileShader(vertexShaderSource, fragmentShaderSource2);
+
+
+	//삼각형 정점 설정
+	float vertices[] = {
+		-0.9f, -0.5f, 0.0f,  // left 
+		-0.0f, -0.5f, 0.0f,  // right
+		-0.45f, 0.5f, 0.0f,  // top 
+
+	};
+
+	float vertice2[] = {
+		// second triangle
+		 0.0f, 0.5f, 0.0f,  // left
+		 0.9f, 0.5f, 0.0f,  // right
+		 0.45f,-0.5f, 0.0f   // top 
+	};
+
+	//Vertex Buffer object(VBO),Vertex Array Object(VAO)
+	unsigned int VBO[2], VAO[2];
+	//정점버퍼의 GPU메모리상의 ID생성
+	glGenVertexArrays(2, VAO);
+	glGenBuffers(2, VBO);
+
+	//정점 Array Buffer 바인드
+	glBindVertexArray(VAO[0]);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO[0]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	glBindVertexArray(VAO[1]);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO[1]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertice2), vertice2, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+
+
+	//render loop
+	while (!glfwWindowShouldClose(window))
+	{
+		processInput(window);
+
+		//gl배경색
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		//삼각형 그리기
+		glUseProgram(orangeTriangle);
+		glBindVertexArray(VAO[0]);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+
+
+		glUseProgram(greenTriangle);
+		glBindVertexArray(VAO[1]);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	}
+
+
+
+	//사용한 버퍼 버퍼들 삭제
+	glDeleteVertexArrays(2, VAO);
+	glDeleteBuffers(2, VBO);
+
+	//glfw 자원 정리
+	glfwTerminate();
+	return 0;
+}
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+	glViewport(0, 0, width, height);
+}
+
+void processInput(GLFWwindow* window)
+{
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, true);
+}
+
+unsigned int CompileShader(const char* vertextShaderSource,const char* fragmentShaderSource) {
 	//정점쉐이더 생성
 	unsigned int vertexShader;
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -108,73 +203,5 @@ int main() {
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
 
-	//삼각형 정점 설정
-	float vertices[] = {
-	-0.5f, -0.5f, 0.0f,
-	 0.5f, -0.5f, 0.0f,
-	 0.0f,  0.5f, 0.0f
-	};
-
-	//Vertex Buffer object(VBO),Vertex Array Object(VAO)
-	unsigned int VBO, VAO;
-	//정점버퍼의 GPU메모리상의 ID생성
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-
-	//정점 Array Buffer 바인드
-	glBindVertexArray(VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
-	//바인드된 VBO에 float배열 복사
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-	//정점속성 설정
-	//1. 매개변수 : shader 소스코드의 (location = 0)에 대응하는 정점속성 생성
-	//2. 정점 크기 지정 vec3이므로 3
-	//3. 데이터 타입
-	//4. 정규화 여부
-	//5. stride 설정 정정버퍼의 비트단위 크기 지정
-	//6. 정점 시작 위치 (void*)로 형변환 해주어야 함
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-
-
-	//render loop
-	while (!glfwWindowShouldClose(window))
-	{
-		processInput(window);
-
-		//gl배경색
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-		
-		//삼각형 그리기
-		glUseProgram(shaderProgram);
-		glBindVertexArray(VAO); 
-		glDrawArrays(GL_TRIANGLES, 0, 3);
-
-		glfwSwapBuffers(window);
-		glfwPollEvents();
-	}
-
-
-
-	//사용한 버퍼 버퍼들 삭제
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
-
-	//glfw 자원 정리
-	glfwTerminate();
-	return 0;
-}
-
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-	glViewport(0, 0, width, height);
-}
-
-void processInput(GLFWwindow* window)
-{
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, true);
+	return shaderProgram;
 }
