@@ -120,10 +120,11 @@ int main() {
 	//정점버퍼의 GPU메모리상의 ID생성
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
+
 	//정점 Array Buffer 바인드
 	glBindVertexArray(VAO);
-
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
 	//바인드된 VBO에 float배열 복사
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
@@ -137,11 +138,6 @@ int main() {
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
-	//glVertexAttribPointer를 호출하면 VBO가 정점 속성의 바운드 정점 버퍼 객체로 등록되어 나중에 안전하게 바인딩 해제
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
-
-
 
 	//render loop
 	while (!glfwWindowShouldClose(window))
@@ -154,7 +150,7 @@ int main() {
 		
 		//삼각형 그리기
 		glUseProgram(shaderProgram);
-		glBindVertexArray(VAO); //
+		glBindVertexArray(VAO); 
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 
 		glfwSwapBuffers(window);
