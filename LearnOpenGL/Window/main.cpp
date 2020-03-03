@@ -5,7 +5,8 @@
 
 //뷰포트 변경시 작동하는 콜백함수
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-
+// 입력값을 받아서 처리
+void processInput(GLFWwindow* window);
 
 int main() {
 	//glfw 초기화
@@ -35,16 +36,21 @@ int main() {
 	glViewport(0, 0, 800, 600);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-	//gl배경색
-	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+
 
 	//render loop설정
 	while (!glfwWindowShouldClose(window))
 	{
+		processInput(window);
+
+		//gl배경색
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
+
 	//glfw 자원 정리
 	glfwTerminate();
 	return 0;
@@ -53,4 +59,10 @@ int main() {
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
+}
+
+void processInput(GLFWwindow* window)
+{
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, true);
 }
