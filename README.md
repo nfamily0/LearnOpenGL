@@ -72,7 +72,7 @@ glClear(GL_COLOR_BUFFER_BIT);
 
     ...
 
-    //render loop
+            //render loop
 
     ...
 
@@ -212,3 +212,42 @@ unsigned int greenTriangle = CompileShader(vertexShaderSource, fragmentShaderSou
 
 ```
 
+
+
+## Shader
+
+![shader01.gif](./image/shader01.gif)
+
+
+
+shader클래스 추가
+
+
+
+```c++
+	//render loop
+	while (!glfwWindowShouldClose(window))
+	{
+		processInput(window);
+
+		//gl배경색
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		//삼각형 그리기
+		progame.use();
+		float timeValue = glfwGetTime();
+		float greenValue = sin(timeValue) / 2.0f + 0.5f; //항상 양수
+		int vertexColorLocation = glGetUniformLocation(progame.ID, "ourColor");
+		glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
+
+		glBindVertexArray(VAO);
+		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+
+
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	}
+```
+
+유니폼을 사용한 shader
