@@ -216,7 +216,7 @@ unsigned int greenTriangle = CompileShader(vertexShaderSource, fragmentShaderSou
 
 ## Shader
 
-![shader01.gif](./image/shader01.gif)
+![shader01.gif](./image/Shader01.gif)
 
 
 
