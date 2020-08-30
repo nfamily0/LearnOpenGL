@@ -1,0 +1,26 @@
+#include <stdio.h>
+#define MAX 100
+char stack[MAX], top = -1;
+int isEmpty() {
+	return top == -1;
+}
+int isFull() {
+	return top == (MAX - 1);
+}
+void push(char d) {
+	stack[++top] = d;
+}
+char pop() {
+	return stack[top--];
+}
+char peek() {
+	return stack[top];
+}
+void prt(char n) {
+	printf("%c ", n);
+}
+void main() {
+	push('A'); push('B'); push('C');
+	prt(pop()); push('D');
+	prt(pop()); prt(pop()); prt(pop());
+}

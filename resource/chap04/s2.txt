@@ -1,0 +1,35 @@
+// 스택: 구조체 변수를 사용
+#include <stdio.h>
+#define MAX 100
+typedef struct {
+	char stack[MAX];
+	int top;
+} myStack;
+void init(myStack* s) {
+	s->top = -1;
+}
+int isEmpty(myStack* s) {
+	return s->top == -1;
+}
+int isFull(myStack* s) {
+	return s->top == (MAX - 1);
+}
+void push(myStack* s, char d) {
+	s->stack[++s->top] = d;
+}
+char pop(myStack* s) {
+	return s->stack[s->top--];
+}
+char peek(myStack* s) {
+	return s->stack[s->top];
+}
+void prt(char n) {
+	printf("%C ", n);
+}
+void main() {
+	myStack s;
+	init(&s);
+	push(&s, 'A'); push(&s, 'B'); push(&s,'C');
+	prt(pop(&s)); push(&s, 'D');
+	prt(pop(&s)); prt(pop(&s)); prt(pop(&s));
+}

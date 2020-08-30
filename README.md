@@ -251,3 +251,23 @@ shader클래스 추가
 ```
 
 유니폼을 사용한 shader
+
+
+
+## Texture
+
+![Texture01.png](./image/Texture01.png)
+
+
+
+
+
+## Transform
+
+![Transform01.gif](./image/Transform01.gif)
+
+
+
+## Light
+
+![Light01.gif](./image/Light01.gif)

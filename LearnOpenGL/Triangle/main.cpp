@@ -63,6 +63,7 @@ int main() {
 		return -1;
 	}
 
+
 	unsigned int orangeTriangle = CompileShader(vertexShaderSource, fragmentShaderSource);
 	unsigned int greenTriangle = CompileShader(vertexShaderSource, fragmentShaderSource2);
 
@@ -72,7 +73,6 @@ int main() {
 		-0.9f, -0.5f, 0.0f,  // left 
 		-0.0f, -0.5f, 0.0f,  // right
 		-0.45f, 0.5f, 0.0f,  // top 
-
 	};
 
 	float vertice2[] = {
@@ -111,6 +111,7 @@ int main() {
 		//gl배경색
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
+
 
 		//삼각형 그리기
 		glUseProgram(orangeTriangle);

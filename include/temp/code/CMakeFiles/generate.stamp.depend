@@ -1,0 +1,5 @@
+# CMake generation dependency list for this directory.
+D:/Downlode/assimp-5.0.1 (1)/assimp-5.0.1/cmake-modules/FindRT.cmake
+D:/Downlode/assimp-5.0.1 (1)/assimp-5.0.1/code/CMakeLists.txt
+D:/Program Files/CMake/share/cmake-3.17/Modules/FindPackageHandleStandardArgs.cmake
+D:/Program Files/CMake/share/cmake-3.17/Modules/FindPackageMessage.cmake
