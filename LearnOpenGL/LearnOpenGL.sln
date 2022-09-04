@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29806.167
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.2092
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Window", "Window\Window.vcxproj", "{EC44BC04-699F-4C8A-BFAD-04E7C9B1984D}"
 EndProject
@@ -28,8 +28,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MultiLight", "MultiLight\MultiLight.vcxproj", "{53E02739-E5EE-4A37-A585-2AFDF915A336}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Model", "Model\Model.vcxproj", "{71042679-7FAB-4363-8D83-79725DF1634F}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Teaport", "Teaport\Teaport.vcxproj", "{F7C25756-77F0-4A84-82AB-3110671380A1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KeyFrameAnimation", "KeyFrameAnimation\KeyFrameAnimation.vcxproj", "{00B77F88-6D7E-4456-AB21-3A14866C9F37}"
 EndProject
@@ -153,14 +151,6 @@ Global
 		{71042679-7FAB-4363-8D83-79725DF1634F}.Release|x64.Build.0 = Release|x64
 		{71042679-7FAB-4363-8D83-79725DF1634F}.Release|x86.ActiveCfg = Release|Win32
 		{71042679-7FAB-4363-8D83-79725DF1634F}.Release|x86.Build.0 = Release|Win32
-		{F7C25756-77F0-4A84-82AB-3110671380A1}.Debug|x64.ActiveCfg = Debug|x64
-		{F7C25756-77F0-4A84-82AB-3110671380A1}.Debug|x64.Build.0 = Debug|x64
-		{F7C25756-77F0-4A84-82AB-3110671380A1}.Debug|x86.ActiveCfg = Debug|Win32
-		{F7C25756-77F0-4A84-82AB-3110671380A1}.Debug|x86.Build.0 = Debug|Win32
-		{F7C25756-77F0-4A84-82AB-3110671380A1}.Release|x64.ActiveCfg = Release|x64
-		{F7C25756-77F0-4A84-82AB-3110671380A1}.Release|x64.Build.0 = Release|x64
-		{F7C25756-77F0-4A84-82AB-3110671380A1}.Release|x86.ActiveCfg = Release|Win32
-		{F7C25756-77F0-4A84-82AB-3110671380A1}.Release|x86.Build.0 = Release|Win32
 		{00B77F88-6D7E-4456-AB21-3A14866C9F37}.Debug|x64.ActiveCfg = Debug|x64
 		{00B77F88-6D7E-4456-AB21-3A14866C9F37}.Debug|x64.Build.0 = Debug|x64
 		{00B77F88-6D7E-4456-AB21-3A14866C9F37}.Debug|x86.ActiveCfg = Debug|Win32

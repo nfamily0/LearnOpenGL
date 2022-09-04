@@ -15,7 +15,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow *window);
 
-veritice[6 * i + 1] = {}
+veritice[6 * i + 1] = {};
 
 
 // settings
